@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.KotlinTips" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/grey_50</item>
+        <item name="android:statusBarColor">@color/grey_900</item>
     </style>
 </resources>

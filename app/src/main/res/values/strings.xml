@@ -7,13 +7,13 @@
     <string name="day2_title">Why Kotlin?</string>
     <string name="day2_desc">Modern, concise, safe, expressive, interoperable and multiplatform. Easy to pick up, so you can create powerful applications immediately.</string>
     <string name="day3">Day 3</string>
-    <string name="day3_title">Coding Environment</string>
+    <string name="day3_title">Coding environment</string>
     <string name="day3_desc">Download IntelliJ IDEA software for free or visit the playground at play.kotlinlang.org</string>
     <string name="day4">Day 4</string>
-    <string name="day4_title">Kotlin Basics</string>
+    <string name="day4_title">Kotlin basics</string>
     <string name="day4_desc">Start learning Kotlin here: hyperskill.org/tracks/18</string>
     <string name="day5">Day 5</string>
-    <string name="day5_title">Hello World!</string>
+    <string name="day5_title">Hello world!</string>
     <string name="day5_desc">Get familiar with the main function and run the most basic kotlin program.</string>
     <string name="day6">Day 6</string>
     <string name="day6_title">Standard input and output</string>
@@ -38,7 +38,7 @@
     <string name="day12_desc">Kotlin provides a more convenient way of working with ranges of values: val range = 0..10</string>
     <string name="day13">Day 13</string>
     <string name="day13_title">String templates</string>
-    <string name="day13_desc">In kotlin you may concatenate two string by having the variable value inside the quotes: "$firstName $lastName"</string>
+    <string name="day13_desc">In Kotlin you may concatenate two strings by having the variable value inside the quotes: \"$firstName $lastName\"</string>
     <string name="day14">Day 14</string>
     <string name="day14_title">Basic operations</string>
     <string name="day14_desc">You should learn all mathematical and boolean operators.</string>
@@ -88,6 +88,6 @@
     <string name="day29_title">Files</string>
     <string name="day29_desc">Learn about file hierarchies, reading from a file and writing to a file.</string>
     <string name="day30">Day 30</string>
-    <string name="day30_title">Graduate Project</string>
+    <string name="day30_title">Graduate project</string>
     <string name="day30_desc">Please complete one of the projects here: hyperskill.org/tracks/18/projects</string>
 </resources>
