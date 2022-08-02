@@ -3,20 +3,25 @@ package com.lalosapps.kotlintips
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,7 +64,7 @@ fun TopAppBar() {
             .background(MaterialTheme.colors.primary)
             .fillMaxWidth()
             .padding(12.dp),
-        contentAlignment = Alignment.TopStart
+        contentAlignment = Alignment.CenterStart
     ) {
         Text(
             text = stringResource(id = R.string.app_name),
@@ -70,38 +75,73 @@ fun TopAppBar() {
 
 @Composable
 fun TipItem(tip: Tip, modifier: Modifier = Modifier) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    val color by animateColorAsState(
+        targetValue = if (expanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    )
     Card(
         modifier = modifier.padding(vertical = 8.dp, horizontal = 16.dp),
         elevation = 4.dp
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioLowBouncy,
+                        stiffness = Spring.StiffnessLow
+                    )
+                )
+                .background(color = color)
         ) {
-            Text(
-                text = stringResource(id = tip.dayRes),
-                style = MaterialTheme.typography.h2
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(id = tip.titleRes),
-                style = MaterialTheme.typography.body1
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Image(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(194.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                painter = painterResource(id = tip.imageRes),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(id = tip.descRes),
-                style = MaterialTheme.typography.body1
-            )
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = stringResource(id = tip.dayRes),
+                        style = MaterialTheme.typography.h2
+                    )
+                    Text(
+                        text = stringResource(id = tip.titleRes),
+                        style = MaterialTheme.typography.body1
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = { expanded = !expanded }) {
+                    Icon(
+                        imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                        tint = MaterialTheme.colors.secondary,
+                        contentDescription = stringResource(id = R.string.expand_button_content_description)
+                    )
+                }
+            }
+            if (expanded) {
+                Column(
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        bottom = 16.dp,
+                        end = 16.dp
+                    )
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(194.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        painter = painterResource(id = tip.imageRes),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = stringResource(id = tip.descRes),
+                        style = MaterialTheme.typography.body1
+                    )
+                }
+            }
         }
     }
 }

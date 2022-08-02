@@ -90,4 +90,5 @@
     <string name="day30">Day 30</string>
     <string name="day30_title">Graduate project</string>
     <string name="day30_desc">Please complete one of the projects here: hyperskill.org/tracks/18/projects</string>
+    <string name="expand_button_content_description">See more or less information about a tip.</string>
 </resources>
